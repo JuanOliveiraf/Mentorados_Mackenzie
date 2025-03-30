@@ -1,4 +1,4 @@
-=# 🤝 Descritivo do Microserviço “Mentorados”
+ 🤝 Descritivo do Microserviço “Mentorados”
 
 Este **microserviço** faz parte da **Plataforma de Mentoria** desenvolvida na disciplina de 
 **Engenharia de Software com Microsserviços** da **Universidade Presbiteriana Mackenzie**. 
@@ -89,7 +89,7 @@ estabelecido pela disciplina, com entregas para cada **MVP**, **deploy** e **apr
 
 ## 🛠️ Tecnologias e Ferramentas
 
- - Pendente
+ - PEndente
 ---
 
 ## 📦 Como Executar Localmente
@@ -98,4 +98,12 @@ estabelecido pela disciplina, com entregas para cada **MVP**, **deploy** e **apr
 2. Project from verison control
 3. cole a URL e execute
 
-**OBS**: Devem ser criadas branch separadas do MAIN
+
+## Membros do Grupo
+
+1. Matheus Barbosa Meloni - 10426969
+2. Juan Oliveira - 10418194
+3. Lucas Freires - 10419841
+4. Miguel Ryan Silva - 10419810
+5. Matheus Brugnaro - 10418625
+
