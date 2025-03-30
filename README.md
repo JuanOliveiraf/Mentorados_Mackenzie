@@ -89,7 +89,7 @@ estabelecido pela disciplina, com entregas para cada **MVP**, **deploy** e **apr
 
 ## 🛠️ Tecnologias e Ferramentas
 
- - Pendente
+ - PEndente
 ---
 
 ## 📦 Como Executar Localmente
