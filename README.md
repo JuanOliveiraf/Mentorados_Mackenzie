@@ -89,8 +89,27 @@ estabelecido pela disciplina, com entregas para cada **MVP**, **deploy** e **apr
 
 ## 🛠️ Tecnologias e Ferramentas
 
- - PEndente
----
+Utilizaremos o **padrão de arquitetura MVC (Model-View-Controller)** no desenvolvimento deste microserviço. Esse padrão promove a separação de responsabilidades, tornando o sistema mais organizado, modular e de fácil manutenção.
+
+A estrutura do projeto será organizada em três camadas principais:
+
+- **Model (Modelo)**  
+  Responsável por representar os dados da aplicação e encapsular as regras de negócio. Nessa camada estarão as estruturas que definem os *Mentorados*, como seus atributos (nome, área de interesse, disponibilidade, etc.) e seus relacionamentos (com sessões, feedbacks, etc.). Aqui também serão tratados os acessos ao banco de dados.
+
+- **View (Visão)**  
+  Esta camada será responsável por formatar as respostas que serão enviadas ao usuário, podendo incluir a serialização de dados, mensagens de retorno, e estruturação de respostas para APIs. Embora o microserviço não tenha uma interface visual direta, a camada de *View* será representada por aquilo que o microserviço entrega como saída (por exemplo, JSONs estruturados).
+
+- **Controller (Controlador)**  
+  Camada intermediária que faz a ponte entre os dados (*Model*) e as ações solicitadas pelos usuários (*View*). Ela será responsável por processar as requisições recebidas, acionar a lógica apropriada nos modelos, e retornar as respostas formatadas. É aqui que se encontra a lógica de aplicação, como criação de novos mentorados, busca por mentores, histórico de sessões, etc.
+
+Além do padrão MVC, outras práticas serão adotadas para manter o código limpo e escalável:
+
+- Separação em **módulos e pacotes** por responsabilidade  
+- Uso de **interfaces claras entre camadas**  
+- Facilitação de **testes automatizados** em cada camada individual  
+- Facilidade para **substituição ou evolução de componentes** (ex: troca de banco de dados, alteração em validações, etc.)
+
+Essa organização permitirá que novos integrantes compreendam facilmente o projeto, além de facilitar a evolução do microserviço conforme novas funcionalidades forem sendo desenvolvidas.
 
 ## 📦 Como Executar Localmente
 
