@@ -45,25 +45,49 @@ usuários que desejam receber mentoria, incluindo:
   disponibilidade de mentores e tomar decisões sobre duplas de mentoria.
 
 ---
+## 🏗️ Arquitetura da Plataforma de Mentoria
 
-## 🏗️ Arquitetura e Integrações
+*A imagem abaixo representa a estrutura modular da aplicação em microsserviços:*
 
-O *microserviço de Mentorados* se comunica com outros serviços da plataforma, como:
+![Diagrama da Arquitetura](imgs/arquitetura_mentorado.jpg)
 
-- **Serviço de Autenticação**  
-  Para validação de credenciais e controle de acesso (mentorados x mentores x gestores).
+A plataforma foi construída com base na **arquitetura de microsserviços**, onde cada serviço possui responsabilidade única, banco de dados próprio e comunicação desacoplada via **API REST**.
 
-- **Serviço de Matching**  
-  Para sugerir mentores adequados ao perfil de cada mentorado.
+A entrada principal do sistema é feita pelo **API Gateway**, que também é responsável pela **validação de autenticação** via **JWT (JSON Web Token)**. Apenas requisições autenticadas são encaminhadas aos microsserviços apropriados.
 
-- **Serviço de Agenda**  
-  Para agendamentos e confirmações de sessões.
+### 🔐 Camadas da Arquitetura
 
-- **Serviço de Notificações**  
-  Para avisar os mentorados sobre novas sessões, lembretes ou feedbacks.
+- **Frontend Web/Mobile**  
+  Interface usada por mentorados, mentores e gestores para interagir com o sistema.
 
-Cada serviço funciona de forma independente, possibilitando escalabilidade, baixo acoplamento 
-e robustez na aplicação.
+- **API Gateway**  
+  Camada intermediária que:
+  - Recebe todas as requisições externas
+  - Valida tokens JWT para autenticação
+  - Redireciona chamadas para os microsserviços corretos
+
+- **Microsserviços**  
+  Cada microserviço é independente e possui seu próprio banco de dados:
+
+  | Serviço                   | Responsabilidade                                     | Banco               |
+  |---------------------------|------------------------------------------------------|----------------------|
+  | `nano-mentorado-service`  | Cadastro, histórico e interesses dos mentorados      | `mentorados_db`      |
+  | `nano-agenda-service`     | Agendamento, cancelamento e listagem de sessões      | `agenda_db`          |
+  | `nano-sugestao-service`   | Sugestões de mentores com base no perfil do usuário  | `sugestao_db`        |
+  | `nano-feedback-service`   | Avaliações e comentários após sessões                | `feedback_db`        |
+  | `nano-notificacao-service`| Envio de e-mails com confirmações, lembretes, etc.   | (SMTP, sem banco)    |
+
+### 🔄 Comunicação entre serviços
+
+Os microsserviços interagem entre si apenas quando necessário, usando **requisições HTTP com o pacote `httpx`**. Exemplos de interações:
+
+- O serviço de **agenda** consulta o serviço de **mentorados** para validar o usuário.
+- O serviço de **feedback** aciona o de **notificações** para enviar e-mail de agradecimento.
+- O serviço de **sugestão** acessa dados do mentorado para gerar recomendações personalizadas.
+
+**✉️ Notificações**
+
+O `nano-notificacao-service` utiliza **SMTP com FastAPI (`smtplib`)** para enviar e-mails. Está preparado para futuras integrações com serviços como **SendGrid**, **Mailgun** ou sistemas de fila (ex: RabbitMQ).
 
 ---
 
