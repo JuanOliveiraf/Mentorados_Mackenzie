@@ -135,12 +135,54 @@ Além do padrão MVC, outras práticas serão adotadas para manter o código lim
 
 Essa organização permitirá que novos integrantes compreendam facilmente o projeto, além de facilitar a evolução do microserviço conforme novas funcionalidades forem sendo desenvolvidas.
 
-## 📦 Como Executar Localmente
+## 🧩 Microserviço: micro-feedback
 
-1. Deve-se clonar o repositorio
-2. Project from verison control
-3. cole a URL e execute
+Este nano-serviço faz parte da arquitetura distribuída da plataforma de mentoria da Universidade Presbiteriana Mackenzie. Ele é responsável por gerenciar os feedbacks fornecidos pelos mentorados após as sessões de mentoria.
 
+### ✨ Funcionalidades
+- Registrar feedbacks com **nota** e **comentário textual**.
+- Listar feedbacks anteriores de um mentorado.
+- Integração com o serviço de notificações para envio de agradecimentos automáticos.
+
+### 🛠 Estrutura
+O serviço está dividido nas seguintes pastas:
+
+micro_feedback/
+├── controller/ # Define as rotas HTTP
+│ └── feedback_controller.py
+├── database/ # Configurações de banco de dados
+│ └── db.py
+├── models/ # Definição do modelo de dados Feedback
+│ └── feedback_model.py
+├── services/ # Regras de negócio (salvar, buscar, notificar)
+│ └── feedback_service.py
+├── main.py # Ponto de entrada com FastAPI
+├── requirements.txt # Dependências do projeto
+
+
+### 🚀 Como executar localmente
+
+1. Crie e ative um ambiente virtual:
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
+
+2. Instale as dependências:
+pip install -r requirements.txt
+ 
+3. Inicie o serviço:
+uvicorn micro_feedback.main:app --reload
+
+4. Acesse a documentação automática do Swagger
+http://127.0.0.1:8000/docs
+
+🔗 Integrações
+micro-notificacao: Envia e-mails após o recebimento do feedback.
+
+micro-agenda: Pode incluir referências ao ID da mentoria.
+
+micro-mentorado: Identifica o mentorado que forneceu o feedback.
 
 ## Membros do Grupo
 
