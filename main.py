@@ -1,6 +1,6 @@
 from fastapi import FastAPI,Query
 from typing import List
-                                            from gerenciamento import gerar_gerenciamento,gerar_cancelamento
+from gerenciamento import gerar_gerenciamento,gerar_cancelamento
 from models import GerenciamentoSaida, Canceling
 from fastapi.middleware.cors import CORSMiddleware
 
