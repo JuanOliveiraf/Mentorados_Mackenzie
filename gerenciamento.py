@@ -1,4 +1,4 @@
-from models import GerenciamentoSaida
+from models import GerenciamentoSaida,Canceling
 from typing import List
 from db import get_connection
 
@@ -38,3 +38,17 @@ def gerar_gerenciamento(mentorado_id: str) -> List[GerenciamentoSaida]:
         mentored_name=sugestao['mentored_name'],
         scheduled_date=sugestao['scheduled_date']
     ) for sugestao in sugestoes]
+
+def gerar_cancelamento(dados: Canceling):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""DELETE FROM mentorings
+                      WHERE ID = %s""",(dados.mentoring_id,))
+    
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+    return

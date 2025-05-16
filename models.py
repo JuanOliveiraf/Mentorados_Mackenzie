@@ -9,3 +9,8 @@ class GerenciamentoSaida(BaseModel):
     mentor_name: str
     mentored_name: str
     scheduled_date: datetime
+
+    
+class Canceling(BaseModel):
+    mentoring_id: int
+    
